@@ -1,0 +1,13 @@
+.table-row {
+  outline: 0.1em solid #434343;
+}
+
+.table-cell {
+  width: 20em;
+}
+.table-cell p {
+  text-align: center;
+}
+.provinces-names {
+  font-weight: 700;
+}

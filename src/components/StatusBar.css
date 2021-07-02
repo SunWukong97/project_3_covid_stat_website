@@ -1,0 +1,28 @@
+.status-bar-wrapper {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 20em;
+}
+.status-bar-bg {
+  height: 1em;
+  width: 70%;
+  background-color: #434343;
+  border-radius: 0.5em;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.status-bar {
+  height: 100%;
+  border-radius: 0.5em;
+}
+.cases {
+  background-color: #c52828;
+}
+.recovered {
+  background-color: #ffc857;
+}
+
+.status-bar-wrapper p {
+  margin-right: 1em;
+}
