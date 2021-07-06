@@ -72,6 +72,13 @@ class TableStats extends Component {
                     barType="recovered"
                   />
                 </td>
+                <td classNAme="table-cell">
+                  <StatusBar
+                    data={provCovidStat.cumulative_deaths}
+                    data2={provCovidStat.cumulative_cases}
+                    barType="mortality"
+                  />
+                </td>
               </tr>
             );
           }
