@@ -55,7 +55,7 @@ class TableStats extends Component {
             }
             return (
               <tr key={provCovidStat.province} className="table-row">
-                <td className="table-cell">
+                <td className="table-cell province-table-cell">
                   <p className="provinces-names">{provinceName}</p>
                 </td>
                 <td className="table-cell">

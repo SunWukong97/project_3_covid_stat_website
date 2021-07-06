@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-content: center;
-  width: 20em;
+  width: 15em;
 }
 .status-bar-bg {
   height: 1em;
@@ -22,7 +22,26 @@
 .recovered {
   background-color: #ffc857;
 }
+.mortality {
+  background-color: #255f85;
+}
 
 .status-bar-wrapper p {
-  margin-right: 1em;
+  margin-right: 0.5em;
+  margin-left: auto;
+  text-align: center;
+}
+
+@media screen and (min-width: 1024px) {
+  .status-bar-wrapper {
+    width: 20em;
+  }
+  .status-bar-bg {
+    width: 70%;
+  }
+  .status-bar-wrapper p {
+    margin-right: 0.5em;
+    margin-left: auto;
+    text-align: center;
+  }
 }

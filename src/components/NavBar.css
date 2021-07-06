@@ -5,5 +5,6 @@ nav a {
 .navbar-logo {
   font-family: "Bungee", sans-serif;
   color: black;
-  font-size: 2rem;
+  font-size: 1.5rem;
+  margin-left: 1.5rem;
 }
