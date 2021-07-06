@@ -5,17 +5,21 @@ function StatusBar(props) {
   const styling = `status-bar ${barType}`;
   let stat;
   let percentage = ((data / data2) * 100).toFixed(2);
+
+  stat = percentage + "%";
+
+  if (barType === "cases") {
+    stat = data;
+  }
   if (percentage < 5) {
     percentage = 6.5;
   }
-  if (barType === "cases") {
-    stat = data;
-  } else {
-    stat = percentage + "%";
-  }
-
+  // else {
+  //   stat = percentage + "%";
+  //   barPercentage = stat;
+  // }
   percentage += "%";
-
+  console.log(percentage);
   return (
     <div className="status-bar-wrapper">
       <p>{stat}</p>
