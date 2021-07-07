@@ -27,21 +27,14 @@
 }
 
 .status-bar-wrapper p {
-  margin-right: 0.5em;
+  box-sizing: border-box;
+  margin-right: auto;
   margin-left: auto;
   text-align: center;
 }
 
 @media screen and (min-width: 1024px) {
-  .status-bar-wrapper {
-    width: 20em;
-  }
-  .status-bar-bg {
-    width: 70%;
-  }
-  .status-bar-wrapper p {
-    margin-right: 0.5em;
-    margin-left: auto;
-    text-align: center;
-  }
+  /* .status-bar-wrapper {
+    width: 18em;
+  } */
 }

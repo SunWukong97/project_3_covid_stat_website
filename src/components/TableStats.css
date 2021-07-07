@@ -1,31 +1,27 @@
 .table-container {
   margin-top: 2em;
   overflow-x: scroll;
-  max-width: 100%;
 }
-/* table {
-  margin-left: auto;
-  margin-right: auto;
-} */
+
 .table-row {
   outline: 0.1em solid #434343;
 }
 
 .table-header p {
+  box-sizing: border-box;
   padding-left: 2em;
   margin-top: 0;
   margin-bottom: 0;
   font-weight: 700;
   color: #434343;
 }
-.table-cell {
-  max-width: 15em;
-  padding-left: 0.3em;
-  padding-right: 0.3em;
-}
 
-.table-row td:last-child {
-  padding-right: 1em;
+/* .table-row td:last-child {
+  padding-right: 0.2em;
+} */
+
+.table-cell {
+  min-width: 20em;
 }
 .table-cell p {
   text-align: center;
@@ -34,25 +30,27 @@
 .table-cell .provinces-names {
   font-weight: 700;
   text-align: left;
-  /* margin-left: 0.5em; */
-  /* padding-right: 0.5em; */
 }
 
 @media screen and (min-width: 1024px) {
-  .provinces-names {
+  .table-cell .provinces-names {
     font-weight: 700;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
+    text-align: center;
   }
 
   .table-cell {
     width: 20em;
-    padding-left: 2em;
-    padding-right: 2em;
+
+    /* padding-right: 5em; */
   }
   .table-container {
     margin-top: 5em;
     overflow-x: hidden;
     max-width: 100%;
+  }
+
+  table {
+    margin-left: auto;
+    margin-right: auto;
   }
 }
