@@ -16,12 +16,14 @@
   color: #434343;
 }
 
-/* .table-row td:last-child {
-  padding-right: 0.2em;
-} */
+.table-row td:last-child {
+  padding-right: 1em;
+  box-sizing: border-box;
+}
 
 .table-cell {
-  min-width: 20em;
+  min-width: 15em;
+  padding-right: 1em;
 }
 .table-cell p {
   text-align: center;
@@ -30,19 +32,25 @@
 .table-cell .provinces-names {
   font-weight: 700;
   text-align: left;
+  margin-left: 2em;
 }
 
+@media screen and (min-width: 720px) {
+  .table-cell .provinces-names {
+    text-align: center;
+  }
+}
 @media screen and (min-width: 1024px) {
   .table-cell .provinces-names {
-    font-weight: 700;
     text-align: center;
   }
 
   .table-cell {
-    width: 20em;
+    padding-right: 1em;
 
     /* padding-right: 5em; */
   }
+
   .table-container {
     margin-top: 5em;
     overflow-x: hidden;
