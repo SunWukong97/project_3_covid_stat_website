@@ -11,12 +11,12 @@ class TableStats extends Component {
     };
   }
   componentDidMount() {
-    let testdat = "2021-02-1";
+    let testdate = "2021-02-1";
     let todayDate = new Date();
     let yesterdayDate = new Date(todayDate);
     yesterdayDate.setDate(yesterdayDate.getDate() - 1);
     let formatDate = yesterdayDate.toISOString().slice(0, 10);
-    const apiUrl1 = `https://api.opencovid.ca/summary?date=${testdat}`;
+    const apiUrl1 = `https://api.opencovid.ca/summary?date=${formatDate}`;
     const apiUrl2 = "https://api.opencovid.ca/other?stat=prov";
 
     let apiUrls = [apiUrl1, apiUrl2];
