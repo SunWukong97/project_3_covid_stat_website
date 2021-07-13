@@ -8,3 +8,11 @@ nav a {
   font-size: 1.5rem;
   margin-left: 1.5rem;
 }
+
+.navbar-logo img {
+  height: 1.5em;
+  width: 1.5em;
+  padding-right: 0.2em;
+  position: relative;
+  top: 0.2em;
+}
