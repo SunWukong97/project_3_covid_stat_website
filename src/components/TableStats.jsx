@@ -8,6 +8,7 @@ class TableStats extends Component {
       dataSet1: null,
       dataSet2: null,
       isLoading: true,
+      date: null,
     };
   }
   componentDidMount() {
@@ -32,14 +33,17 @@ class TableStats extends Component {
         dataSet1: data[0].summary,
         dataSet2: data[1].prov,
         isLoading: false,
+        date: formatDate,
       });
     });
   }
 
   render() {
     let tableData;
+    let date;
     //needed as it maybe called before api call has been completed
     if (!this.state.isLoading) {
+      date = this.state.date;
       tableData = this.state.dataSet1.map((provCovidStat) => {
         return this.state.dataSet2.map((provInfo) => {
           if (
@@ -89,27 +93,30 @@ class TableStats extends Component {
     }
 
     return (
-      <div className="table-container">
-        <table>
-          <tbody>
-            <tr className="table-header">
-              <td className="table-cell">
-                <p>Province/Territories</p>
-              </td>
-              <td className="table-cell">
-                <p>Number Of Cases</p>
-              </td>
-              <td className="table-cell">
-                <p>Recovered</p>
-              </td>
-              <td className="table-cell">
-                <p>Mortality Rate</p>
-              </td>
-            </tr>
-            {tableData}
-          </tbody>
-        </table>
-      </div>
+      <React.Fragment>
+        <p className="date">{date}</p>
+        <div className="table-container">
+          <table>
+            <tbody>
+              <tr className="table-header">
+                <td className="table-cell">
+                  <p>Province/Territories</p>
+                </td>
+                <td className="table-cell">
+                  <p>Number Of Cases</p>
+                </td>
+                <td className="table-cell">
+                  <p>Recovered</p>
+                </td>
+                <td className="table-cell">
+                  <p>Mortality Rate</p>
+                </td>
+              </tr>
+              {tableData}
+            </tbody>
+          </table>
+        </div>
+      </React.Fragment>
     );
   }
 }
