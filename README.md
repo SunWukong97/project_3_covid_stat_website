@@ -1,2 +1,2 @@
 # project_3_covid_stat_website
- creating a react app along with using fetch api request
+ A react web app that utilizes the fetch api interface in order to show covid stats in canada. API used [Open Covid](https://opencovid.ca/api/)
