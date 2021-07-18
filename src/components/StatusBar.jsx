@@ -19,7 +19,7 @@ function StatusBar(props) {
   //   barPercentage = stat;
   // }
   percentage += "%";
-  console.log(percentage);
+  //console.log(percentage);
   return (
     <div className="status-bar-wrapper">
       <p>{stat}</p>
