@@ -12,7 +12,6 @@ class TableStats extends Component {
     };
   }
   componentDidMount() {
-    let testdate = "2021-02-1";
     let todayDate = new Date();
     let yesterdayDate = new Date(todayDate);
     yesterdayDate.setDate(yesterdayDate.getDate() - 1);
@@ -77,7 +76,7 @@ class TableStats extends Component {
                     barType="recovered"
                   />
                 </td>
-                <td classNAme="table-cell">
+                <td className="table-cell">
                   <StatusBar
                     data={provCovidStat.cumulative_deaths}
                     data2={provCovidStat.cumulative_cases}
