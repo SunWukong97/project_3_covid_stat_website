@@ -12,6 +12,7 @@ class TableStats extends Component {
     };
   }
   componentDidMount() {
+    let nodataDate = "2032-01-01";
     let todayDate = new Date();
     let yesterdayDate = new Date(todayDate);
     yesterdayDate.setDate(yesterdayDate.getDate() - 1);
@@ -43,72 +44,82 @@ class TableStats extends Component {
     //needed as it maybe called before api call has been completed
     if (!this.state.isLoading) {
       date = this.state.date;
-      tableData = this.state.dataSet1.map((provCovidStat) => {
-        return this.state.dataSet2.map((provInfo) => {
-          if (
-            provCovidStat.province === provInfo.province &&
-            provCovidStat.province !== "Repatriated"
-          ) {
-            let provinceName;
-            if (provInfo.province === "BC") {
-              provinceName = "British Columbia";
-            } else if (provInfo.province === "NL") {
-              provinceName = "Newfoundland and Labrador";
-            } else {
-              provinceName = provInfo.province;
+      if (this.state.dataSet1.length !== 0) {
+        tableData = this.state.dataSet1.map((provCovidStat) => {
+          return this.state.dataSet2.map((provInfo) => {
+            if (
+              provCovidStat.province === provInfo.province &&
+              provCovidStat.province !== "Repatriated"
+            ) {
+              let provinceName;
+              if (provInfo.province === "BC") {
+                provinceName = "British Columbia";
+              } else if (provInfo.province === "NL") {
+                provinceName = "Newfoundland and Labrador";
+              } else {
+                provinceName = provInfo.province;
+              }
+              return (
+                <tr key={provCovidStat.province} className="table-row">
+                  <td className="table-cell province-table-cell">
+                    <p className="provinces-names">{provinceName}</p>
+                  </td>
+                  <td className="table-cell">
+                    <StatusBar
+                      data={provCovidStat.active_cases}
+                      data2={provInfo.pop}
+                      barType="cases"
+                    />
+                  </td>
+                  <td className="table-cell">
+                    <StatusBar
+                      data={provCovidStat.cumulative_recovered}
+                      data2={provCovidStat.cumulative_cases}
+                      barType="recovered"
+                    />
+                  </td>
+                  <td className="table-cell">
+                    <StatusBar
+                      data={provCovidStat.cumulative_deaths}
+                      data2={provCovidStat.cumulative_cases}
+                      barType="mortality"
+                    />
+                  </td>
+                </tr>
+              );
             }
-            return (
-              <tr key={provCovidStat.province} className="table-row">
-                <td className="table-cell province-table-cell">
-                  <p className="provinces-names">{provinceName}</p>
-                </td>
-                <td className="table-cell">
-                  <StatusBar
-                    data={provCovidStat.active_cases}
-                    data2={provInfo.pop}
-                    barType="cases"
-                  />
-                </td>
-                <td className="table-cell">
-                  <StatusBar
-                    data={provCovidStat.cumulative_recovered}
-                    data2={provCovidStat.cumulative_cases}
-                    barType="recovered"
-                  />
-                </td>
-                <td className="table-cell">
-                  <StatusBar
-                    data={provCovidStat.cumulative_deaths}
-                    data2={provCovidStat.cumulative_cases}
-                    barType="mortality"
-                  />
-                </td>
-              </tr>
-            );
-          }
-          return null;
+            return null;
+          });
         });
-      });
+      } else {
+        tableData = (
+          <tr>
+            <td colSpan="4" align="center">
+              <p className="error">Data is Currently Unavailable</p>
+            </td>
+          </tr>
+        );
+      }
     }
 
     return (
       <React.Fragment>
-        <p className="date">{date}</p>
+        <h1 className="date">{date}</h1>
         <div className="table-container">
           <table>
             <tbody>
               <tr className="table-header">
                 <td className="table-cell">
-                  <p>Province/Territories</p>
+                  <h2>Province/Territories</h2>
                 </td>
                 <td className="table-cell">
-                  <p>Number Of Cases</p>
+                  <h2>Number Of Cases</h2>
                 </td>
                 <td className="table-cell">
-                  <p>Recovered</p>
+                  <h2>Recovered</h2>
                 </td>
                 <td className="table-cell">
-                  <p>Mortality Rate</p>
+                  <h2>Mortality Rate</h2>
                 </td>
               </tr>
               {tableData}
