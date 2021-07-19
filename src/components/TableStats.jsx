@@ -12,13 +12,15 @@ class TableStats extends Component {
     };
   }
   componentDidMount() {
-    let testDate = "2021-12-12";
+    let testDate = "2021-12-12"; //in the event the api call returns an empty json object
     let defaultDate = "2021-01-12";
     let todayDate = new Date();
     let yesterdayDate = new Date(todayDate);
     yesterdayDate.setDate(yesterdayDate.getDate() - 1);
     let formatDate = yesterdayDate.toISOString().slice(0, 10);
+    //the default date if the api call returns an empty array within the json object
     const defaultapiUrlCall = `https://api.opencovid.ca/summary?date=${defaultDate}`;
+
     const apiUrl1 = `https://api.opencovid.ca/summary?date=${testDate}`;
     const apiUrl2 = "https://api.opencovid.ca/other?stat=prov";
 
