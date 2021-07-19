@@ -1,8 +1,15 @@
+a {
+  text-decoration: none;
+}
 .about-container {
   padding-bottom: 5em;
+  max-width: 95vw;
+  margin-left: auto;
+  margin-right: auto;
 }
-.about-container h2,
-.about-container p {
+.about-container h2 {
   text-align: center;
-  max-width: 100vw;
+}
+.about-container p {
+  text-align: left;
 }

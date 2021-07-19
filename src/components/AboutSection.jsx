@@ -6,7 +6,9 @@ function AboutSection() {
       <h2>About</h2>
       <p>
         This is a personal project where I create a react app along with the
-        usage of the <a href="https://opencovid.ca/api/">Open Covid API</a> to
+        usage of the <a href="https://opencovid.ca/api/">Open Covid API</a>{" "}
+        licensed under the{" "}
+        <a href="https://creativecommons.org/licenses/by/4.0/">CC by 4.0</a> to
         create a visual representation of Covid stats in Canada. Additional
         features such as more in-depth statistics and info will be added in the
         future.
