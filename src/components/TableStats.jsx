@@ -31,15 +31,6 @@ class TableStats extends Component {
     )
       .then((data) => {
         if (data[0].summary.length !== 0) {
-          // console.log(data[0].summary.length);
-          // console.log("Success", data[0]);
-          // console.log("Success", data[1]);
-          // this.setState({
-          //   dataSet1: data[0].summary,
-          //   dataSet2: data[1].prov,
-          //   isLoading: false,
-          //   date: formatDate,
-          // });
           this.processData(data, formatDate);
         } else {
           console.log("no data");
