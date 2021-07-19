@@ -12,28 +12,58 @@ class TableStats extends Component {
     };
   }
   componentDidMount() {
+    let testDate = "2021-12-12";
+    let defaultDate = "2021-01-12";
     let todayDate = new Date();
     let yesterdayDate = new Date(todayDate);
     yesterdayDate.setDate(yesterdayDate.getDate() - 1);
     let formatDate = yesterdayDate.toISOString().slice(0, 10);
-    const apiUrl1 = `https://api.opencovid.ca/summary?date=${formatDate}`;
+    const defaultapiUrlCall = `https://api.opencovid.ca/summary?date=${defaultDate}`;
+    const apiUrl1 = `https://api.opencovid.ca/summary?date=${testDate}`;
     const apiUrl2 = "https://api.opencovid.ca/other?stat=prov";
 
     let apiUrls = [apiUrl1, apiUrl2];
 
     Promise.all(
       apiUrls.map((urlIndex) =>
-        fetch(urlIndex).then((response) => parseJson(response))
+        fetch(urlIndex).then((response) => this.parseJson(response))
       )
-    ).then((data) => {
-      console.log("Success", data[0]);
-      console.log("Success", data[1]);
-      this.setState({
-        dataSet1: data[0].summary,
-        dataSet2: data[1].prov,
-        isLoading: false,
-        date: formatDate,
-      });
+    )
+      .then((data) => {
+        if (data[0].summary.length !== 0) {
+          // console.log(data[0].summary.length);
+          // console.log("Success", data[0]);
+          // console.log("Success", data[1]);
+          // this.setState({
+          //   dataSet1: data[0].summary,
+          //   dataSet2: data[1].prov,
+          //   isLoading: false,
+          //   date: formatDate,
+          // });
+          this.processData(data, formatDate);
+        } else {
+          console.log("no data");
+          return fetch(defaultapiUrlCall);
+        }
+      })
+      .then((response) => this.parseJson(response))
+      .then((data) => {
+        console.log(data.summary);
+      })
+      .catch((error) => console.log(error));
+  }
+  parseJson(response) {
+    return response.json();
+  }
+  processData(data, date) {
+    console.log(data[0].summary.length);
+    console.log("Success", data[0]);
+    console.log("Success", data[1]);
+    this.setState({
+      dataSet1: data[0].summary,
+      dataSet2: data[1].prov,
+      isLoading: false,
+      date: date,
     });
   }
 
@@ -119,8 +149,8 @@ class TableStats extends Component {
     );
   }
 }
-function parseJson(response) {
-  return response.json();
-}
+// function parseJson(response) {
+//   return response.json();
+// }
 
 export default TableStats;
