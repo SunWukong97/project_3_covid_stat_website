@@ -93,7 +93,7 @@ class TableStats extends Component {
 
     return (
       <React.Fragment>
-        <p className="date">{date}</p>
+        <h1 className="date">{date}</h1>
         <div className="table-container">
           <table>
             <tbody>
