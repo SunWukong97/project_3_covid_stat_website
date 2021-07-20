@@ -42,64 +42,63 @@ class TableStats extends Component {
     let tableData;
     let date;
     //needed as it maybe called before api call has been completed
-    if (!this.state.isLoading) {
+    if (!this.state.isLoading && this.state.dataSet1.length !== 0) {
       date = this.state.date;
-      if (this.state.dataSet1.length !== 0) {
-        tableData = this.state.dataSet1.map((provCovidStat) => {
-          return this.state.dataSet2.map((provInfo) => {
-            if (
-              provCovidStat.province === provInfo.province &&
-              provCovidStat.province !== "Repatriated"
-            ) {
-              let provinceName;
-              if (provInfo.province === "BC") {
-                provinceName = "British Columbia";
-              } else if (provInfo.province === "NL") {
-                provinceName = "Newfoundland and Labrador";
-              } else {
-                provinceName = provInfo.province;
-              }
-              return (
-                <tr key={provCovidStat.province} className="table-row">
-                  <td className="table-cell province-table-cell">
-                    <p className="provinces-names">{provinceName}</p>
-                  </td>
-                  <td className="table-cell">
-                    <StatusBar
-                      data={provCovidStat.active_cases}
-                      data2={provInfo.pop}
-                      barType="cases"
-                    />
-                  </td>
-                  <td className="table-cell">
-                    <StatusBar
-                      data={provCovidStat.cumulative_recovered}
-                      data2={provCovidStat.cumulative_cases}
-                      barType="recovered"
-                    />
-                  </td>
-                  <td className="table-cell">
-                    <StatusBar
-                      data={provCovidStat.cumulative_deaths}
-                      data2={provCovidStat.cumulative_cases}
-                      barType="mortality"
-                    />
-                  </td>
-                </tr>
-              );
+
+      tableData = this.state.dataSet1.map((provCovidStat) => {
+        return this.state.dataSet2.map((provInfo) => {
+          if (
+            provCovidStat.province === provInfo.province &&
+            provCovidStat.province !== "Repatriated"
+          ) {
+            let provinceName;
+            if (provInfo.province === "BC") {
+              provinceName = "British Columbia";
+            } else if (provInfo.province === "NL") {
+              provinceName = "Newfoundland and Labrador";
+            } else {
+              provinceName = provInfo.province;
             }
-            return null;
-          });
+            return (
+              <tr key={provCovidStat.province} className="table-row">
+                <td className="table-cell province-table-cell">
+                  <p className="provinces-names">{provinceName}</p>
+                </td>
+                <td className="table-cell">
+                  <StatusBar
+                    data={provCovidStat.active_cases}
+                    data2={provInfo.pop}
+                    barType="cases"
+                  />
+                </td>
+                <td className="table-cell">
+                  <StatusBar
+                    data={provCovidStat.cumulative_recovered}
+                    data2={provCovidStat.cumulative_cases}
+                    barType="recovered"
+                  />
+                </td>
+                <td className="table-cell">
+                  <StatusBar
+                    data={provCovidStat.cumulative_deaths}
+                    data2={provCovidStat.cumulative_cases}
+                    barType="mortality"
+                  />
+                </td>
+              </tr>
+            );
+          }
+          return null;
         });
-      } else {
-        tableData = (
-          <tr>
-            <td colSpan="4" align="center">
-              <p className="error">Data is Currently Unavailable</p>
-            </td>
-          </tr>
-        );
-      }
+      });
+    } else {
+      tableData = (
+        <tr>
+          <td colSpan="4" align="center">
+            <p className="error">Data is Currently Unavailable</p>
+          </td>
+        </tr>
+      );
     }
 
     return (
