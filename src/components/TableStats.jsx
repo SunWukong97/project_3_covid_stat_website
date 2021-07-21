@@ -102,7 +102,7 @@ class TableStats extends Component {
                   <p>Province/Territories</p>
                 </td>
                 <td className="table-cell">
-                  <p>Number Of Cases</p>
+                  <p>Number Of Active Cases</p>
                 </td>
                 <td className="table-cell">
                   <p>Recovered</p>
