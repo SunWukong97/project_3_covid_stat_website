@@ -12,6 +12,7 @@ class TableStats extends Component {
     };
   }
   componentDidMount() {
+    let nodataDate = "2032-01-01";
     let todayDate = new Date();
     let yesterdayDate = new Date(todayDate);
     yesterdayDate.setDate(yesterdayDate.getDate() - 1);
@@ -41,8 +42,9 @@ class TableStats extends Component {
     let tableData;
     let date;
     //needed as it maybe called before api call has been completed
-    if (!this.state.isLoading) {
+    if (!this.state.isLoading && this.state.dataSet1.length !== 0) {
       date = this.state.date;
+
       tableData = this.state.dataSet1.map((provCovidStat) => {
         return this.state.dataSet2.map((provInfo) => {
           if (
@@ -89,6 +91,14 @@ class TableStats extends Component {
           return null;
         });
       });
+    } else {
+      tableData = (
+        <tr>
+          <td colSpan="4" align="center">
+            <p className="error">Data is Currently Unavailable</p>
+          </td>
+        </tr>
+      );
     }
 
     return (
@@ -99,16 +109,16 @@ class TableStats extends Component {
             <tbody>
               <tr className="table-header">
                 <td className="table-cell">
-                  <p>Province/Territories</p>
+                  <h2>Province/Territories</h2>
                 </td>
                 <td className="table-cell">
-                  <p>Number Of Active Cases</p>
+                  <h2>Number Of Active Cases</h2>
                 </td>
                 <td className="table-cell">
-                  <p>Recovered</p>
+                  <h2>Recovered</h2>
                 </td>
                 <td className="table-cell">
-                  <p>Mortality Rate</p>
+                  <h2>Mortality Rate</h2>
                 </td>
               </tr>
               {tableData}
