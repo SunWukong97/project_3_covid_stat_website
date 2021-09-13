@@ -14,12 +14,9 @@ function StatusBar(props) {
   if (percentage < 5) {
     percentage = 6.5;
   }
-  // else {
-  //   stat = percentage + "%";
-  //   barPercentage = stat;
-  // }
+
   percentage += "%";
-  //console.log(percentage);
+
   return (
     <div className="status-bar-wrapper">
       <p>{stat}</p>

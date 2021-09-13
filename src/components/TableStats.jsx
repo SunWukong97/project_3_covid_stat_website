@@ -12,7 +12,6 @@ class TableStats extends Component {
     };
   }
   componentDidMount() {
-    let nodataDate = "2032-01-01";
     let todayDate = new Date();
     let yesterdayDate = new Date(todayDate);
     yesterdayDate.setDate(yesterdayDate.getDate() - 1);
