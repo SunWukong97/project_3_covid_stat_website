@@ -8,6 +8,10 @@ import React, { Component } from "react";
 class App extends Component {
   constructor(props) {
     super(props);
+    this.apiCall = this.apiCall.bind(this);
+    this.parseJson = this.parseJson.bind(this);
+    //this.dateSelection = this.dateSelection.bind(this);
+
     this.state = {
       dataSet1: null,
       dataSet2: null,
@@ -26,6 +30,7 @@ class App extends Component {
     this.apiCall(formatDate);
   }
 
+  //handles the api call and requires a date in yyyy-mm-dd or dd-mm-yyyy format as an argument
   apiCall(dateValue) {
     const apiUrl1 = `https://api.opencovid.ca/summary?date=${dateValue}`;
     const apiUrl2 = "https://api.opencovid.ca/other?stat=prov";
@@ -55,9 +60,9 @@ class App extends Component {
     return response.json();
   }
 
-  dateSelection(date) {
-    this.apiCall(date);
-  }
+  // dateSelection(date) {
+  //   this.apiCall(date);
+  // }
 
   render() {
     let heroSection;
@@ -75,7 +80,7 @@ class App extends Component {
     }
     return (
       <React.Fragment>
-        <NavBar />
+        <NavBar dateSelection={this.apiCall} />
         {heroSection}
         <AboutSection />
       </React.Fragment>
