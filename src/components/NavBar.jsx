@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./NavBar.css";
 import logo from "../images/logo.png";
+
+import MyDatePicker from "./MyDatePicker";
 class NavBar extends Component {
   render() {
     return (
@@ -10,6 +12,8 @@ class NavBar extends Component {
             <img src={logo} alt="the logo" />
             COVID STATS CAN
           </a>
+
+          <MyDatePicker dateSelection={this.props.dateSelection} />
         </div>
       </nav>
     );
