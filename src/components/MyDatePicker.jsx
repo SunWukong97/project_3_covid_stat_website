@@ -1,5 +1,6 @@
 import React from "react";
 
+import "./MyDatePicker.css";
 function MyDatePicker(props) {
   const { dateSelection } = props;
   const onChangeHandler = (event) => {
@@ -7,7 +8,13 @@ function MyDatePicker(props) {
   };
 
   return (
-    <input type="date" name="Date selection" onChange={onChangeHandler}></input>
+    <div className="date-picker-container">
+      <input
+        type="date"
+        name="Date selection"
+        onChange={onChangeHandler}
+      ></input>
+    </div>
   );
 }
 
