@@ -2,6 +2,12 @@ nav a {
   text-decoration: none;
 }
 
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .navbar-logo {
   font-family: "Bungee", sans-serif;
   color: black;
