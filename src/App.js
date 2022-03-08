@@ -4,6 +4,7 @@ import "./App.css";
 import NavBar from "./components/NavBar.jsx";
 import HeroSection from "./components/HeroSection";
 import AboutSection from "./components/AboutSection";
+import CircleBar from "./components/CircleBar";
 import React, { Component } from "react";
 class App extends Component {
   constructor(props) {
@@ -83,6 +84,7 @@ class App extends Component {
         <NavBar dateSelection={this.apiCall} />
         {heroSection}
         <AboutSection />
+        <CircleBar />
       </React.Fragment>
     );
   }
