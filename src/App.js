@@ -5,6 +5,8 @@ import NavBar from "./components/NavBar.jsx";
 import HeroSection from "./components/HeroSection";
 import AboutSection from "./components/AboutSection";
 import CircleBar from "./components/CircleBar";
+import StatsCard from "./components/StatsCard";
+import StatsCardDeck from "./components/StatsCardDeck";
 import React, { Component } from "react";
 class App extends Component {
   constructor(props) {
@@ -17,6 +19,7 @@ class App extends Component {
       dataSet1: null,
       dataSet2: null,
       dataSet3: null,
+      dataSet4: null,
       isLoading: true,
       date: null,
     };
@@ -66,7 +69,9 @@ class App extends Component {
   // }
 
   render() {
+    console.log(this.state.dataSet1);
     let heroSection;
+    let statsCardDeck;
     if (!this.state.isLoading && this.state.dataSet1.length !== 0) {
       heroSection = (
         <HeroSection
@@ -74,6 +79,12 @@ class App extends Component {
           data2={this.state.dataSet2}
           data3={this.state.dataSet3}
           date={this.state.date}
+        />
+      );
+      statsCardDeck = (
+        <StatsCardDeck
+          data1={this.state.dataSet1}
+          data2={this.state.dataSet2}
         />
       );
     } else {
@@ -84,7 +95,7 @@ class App extends Component {
         <NavBar dateSelection={this.apiCall} />
         {heroSection}
         <AboutSection />
-        <CircleBar />
+        {statsCardDeck}
       </React.Fragment>
     );
   }

@@ -1,0 +1,10 @@
+.circle-bar {
+  width: fit-content;
+  height: 10em;
+}
+.circle-bar .percentage {
+  position: relative;
+  margin-top: -4.5em;
+  font-size: 1.25rem;
+  text-align: center;
+}

@@ -1,0 +1,20 @@
+.card {
+  /* box-shadow: 0.4em 0.4em 2em 0.2em rgb(128, 128, 128); */
+  padding: 2em 10em;
+  background-color: rgb(255, 255, 255);
+  max-width: 20%;
+  display: flex;
+  justify-content: center;
+  border: 0.1em solid rgb(163, 163, 163);
+}
+.card-content {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -2em;
+  text-align: center;
+  width: fit-content;
+}
+
+.card-content p {
+  font-weight: bold;
+}

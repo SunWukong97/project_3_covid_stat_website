@@ -1,14 +1,16 @@
 import React from "react";
-function CircleBar() {
-  let strokeWidth = 2;
-  let radius = 40;
+import "./CircleBar.css";
+function CircleBar(props) {
+  const { size, percentage } = props;
+  let strokeWidth = 8;
+  let radius = size / 2;
 
-  let style = {
+  let svgStyle = {
     //width and height needs to be 2 * the radius for it to work properly
     width: `${radius * 2}`,
     height: `${radius * 2}`,
-    background: "grey",
   };
+  let strokeColour = "#28C557";
   let circleStyle = {
     //the transformation point is based off the svg continer
     transform: "rotate(-90deg)",
@@ -23,26 +25,28 @@ function CircleBar() {
   // set both strokeDasharray values: width, dash gap, to circumference so it will become 1 large dash covering the entire circumference
   //since gap is the same length it won't be visible
   let circumference = radius * 2 * Math.PI;
-  let percentage = 70;
   let offset = circumference - (circumference * percentage) / 100;
   return (
-    <svg style={style}>
-      <circle
-        style={circleStyle}
-        cx={radius}
-        cy={radius}
-        r={radius}
-        stroke="white"
-        strokeWidth={strokeWidth}
-        fill="transparent"
-        strokeDasharray={`${circumference}, ${circumference}`}
-        /*
-        strokeDashoffset: if same length as circumference if will be 0%
-        if circumference is 0 it is 100%
-        */
-        strokeDashoffset={offset}
-      />
-    </svg>
+    <div className="circle-bar">
+      <svg style={svgStyle}>
+        <circle
+          style={circleStyle}
+          cx={radius + 15}
+          cy={radius + 15}
+          r={radius}
+          stroke={strokeColour}
+          strokeWidth={strokeWidth}
+          fill="transparent"
+          strokeDasharray={`${circumference}, ${circumference}`}
+          /*
+          strokeDashoffset: if same length as circumference if will be 0%
+          if is 0 it is 100%
+          */
+          strokeDashoffset={offset}
+        />
+      </svg>
+      <p className="percentage">{`${percentage}%`}</p>
+    </div>
   );
 }
 
