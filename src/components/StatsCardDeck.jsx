@@ -13,6 +13,7 @@ function StatsCardDeck(props) {
       ) {
         return (
           <StatsCard
+            key={provStats.province}
             provinceName={provStats.province}
             fullyVacc={provStats.cumulative_cvaccine}
             population={provInfo.pop}
@@ -22,6 +23,6 @@ function StatsCardDeck(props) {
       return null;
     });
   });
-  return <div className="card-container">{deckOfCards}</div>;
+  return <div className="card-deck-container">{deckOfCards}</div>;
 }
 export default StatsCardDeck;

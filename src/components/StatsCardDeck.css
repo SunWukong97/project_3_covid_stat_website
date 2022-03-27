@@ -1,5 +1,19 @@
-.card-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+.card-deck-container {
+  display: grid;
+  row-gap: 1em;
+  grid-template-columns: 1fr;
+  /*align items in the grid according the block-axis aka the vertical axis left and right side walls*/
+  justify-items: center;
+
+  /*seems to shift the grid axis to the center of the screen*/
+  justify-content: center;
+}
+
+@media screen and (min-width: 768px) {
+  .card-deck-container {
+    grid-template-columns: 1fr 1fr;
+    width: fit-content;
+    margin: 0 auto 0 auto;
+    column-gap: 1em;
+  }
 }
