@@ -94,8 +94,8 @@ class App extends Component {
       <React.Fragment>
         <NavBar dateSelection={this.apiCall} />
         {heroSection}
-        <AboutSection />
         {statsCardDeck}
+        <AboutSection />
       </React.Fragment>
     );
   }
