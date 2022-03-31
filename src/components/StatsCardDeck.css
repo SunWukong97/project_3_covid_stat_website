@@ -1,3 +1,7 @@
+h2 {
+  text-align: center;
+  margin-top: 3em;
+}
 .card-deck-container {
   display: grid;
   row-gap: 1em;
@@ -7,13 +11,21 @@
 
   /*seems to shift the grid axis to the center of the screen*/
   justify-content: center;
+  margin-top: 2em;
 }
 
 @media screen and (min-width: 768px) {
   .card-deck-container {
     grid-template-columns: 1fr 1fr;
     width: fit-content;
-    margin: 0 auto 0 auto;
+    margin-left: auto;
+    margin-right: auto;
     column-gap: 1em;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .card-deck-container {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
   }
 }
