@@ -4,8 +4,6 @@ import "./App.css";
 import NavBar from "./components/NavBar.jsx";
 import HeroSection from "./components/HeroSection";
 import AboutSection from "./components/AboutSection";
-import CircleBar from "./components/CircleBar";
-import StatsCard from "./components/StatsCard";
 import StatsCardDeck from "./components/StatsCardDeck";
 import React, { Component } from "react";
 class App extends Component {
@@ -69,7 +67,6 @@ class App extends Component {
   // }
 
   render() {
-    console.log(this.state.dataSet1);
     let heroSection;
     let statsCardDeck;
     if (!this.state.isLoading && this.state.dataSet1.length !== 0) {
