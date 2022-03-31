@@ -23,6 +23,11 @@ function StatsCardDeck(props) {
       return null;
     });
   });
-  return <div className="card-deck-container">{deckOfCards}</div>;
+  return (
+    <React.Fragment>
+      <h2>Vaccination Status</h2>
+      <div className="card-deck-container">{deckOfCards}</div>
+    </React.Fragment>
+  );
 }
 export default StatsCardDeck;
