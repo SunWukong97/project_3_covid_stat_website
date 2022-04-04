@@ -8,6 +8,6 @@
  * [Open Covid API](https://opencovid.ca/api/) licensed undered [Creative Commons Attribution 4.0 international license](https://creativecommons.org/licenses/by/4.0/)
  
  ## Credits
- Author: Thomas Nguyen
+ Author: Thomas Nguyen  
  creators of the [Open Covid API](https://opencovid.ca/api/): [COVID-19 Canada Open Data Working Group](https://opencovid.ca/about/) 
 
