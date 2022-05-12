@@ -44,9 +44,9 @@ class App extends Component {
         fetch(urlIndex).then((response) => this.parseJson(response))
       )
     ).then((data) => {
-      console.log("Success", data[0]);
-      console.log("Success", data[1]);
-      console.log("success", data[2]);
+      // console.log("Success", data[0]);
+      // console.log("Success", data[1]);
+      // console.log("success", data[2]);
 
       this.setState({
         dataSet1: data[0].summary,
