@@ -59,7 +59,7 @@ apiCall(dateValue);
 const apiUrl1 = `https://api.opencovid.ca/summary?date=${dateValue}`;
 ```
 
-After that `Promise.all` is used to fetch and process data from the api as multiple apis urls being used at once to retrieve 3 datasets since `fetch` can only be used for a single api url. Then `this.setState` property is used to store the 3 datasets
+After that `Promise.all` is used to fetch and process data from the api as multiple apis urls being used at once to retrieve 3 datasets since `fetch` can only be used for a single api url. Then `this.setState` property is used to store the 3 datasets along with whether or not they are still loading in.
 
 The method for handling the api call:
 
@@ -94,4 +94,46 @@ The reason for creating a method to handle the api call is to allow the NavBar c
 
 ```jsx
 <NavBar dateSelection={this.apiCall} />
+```
+
+## Showing the data
+
+In order to dynamically update the data being shown in the `render()` method some variables are created to store the current state/information of the HeroSection and StatsCardDeck components being shown.
+
+```jsx
+let heroSection;
+let statsCardDeck;
+```
+
+They are then used in the return function within the render method
+
+```jsx
+return (
+  <React.Fragment>
+    <NavBar dateSelection={this.apiCall} />
+    {heroSection}
+    {statsCardDeck}
+    <AboutSection />
+  </React.Fragment>
+);
+```
+
+In order to prevent an error of rendering the component before the api call is done loading or has failed to load the datasets an if else block is used to dynamically set whether the statiscs are shown or an error message instead.
+
+```jsx
+if (!this.state.isLoading && this.state.dataSet1.length !== 0) {
+  heroSection = (
+    <HeroSection
+      data1={this.state.dataSet1}
+      data2={this.state.dataSet2}
+      data3={this.state.dataSet3}
+      date={this.state.date}
+    />
+  );
+  statsCardDeck = (
+    <StatsCardDeck data1={this.state.dataSet1} data2={this.state.dataSet2} />
+  );
+} else {
+  heroSection = <p className="error">Data is currently Unavailable</p>;
+}
 ```
