@@ -54,7 +54,11 @@ class App extends Component {
           }
           return this.parseJson(response);
         })
-      )
+      ),
+      {
+        //needed due to some cors error and work around it
+        mode: "no-cors",
+      }
     )
       .then((data) => {
         console.log("Success", data[0].data);
