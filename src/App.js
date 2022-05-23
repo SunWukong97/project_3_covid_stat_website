@@ -48,17 +48,16 @@ class App extends Component {
 
     Promise.all(
       apiUrls.map((urlIndex) =>
-        fetch(urlIndex).then((response) => {
+        fetch(urlIndex, {
+          //needed due to some cors error and work around it
+          mode: "no-cors",
+        }).then((response) => {
           if (!response.ok) {
             throw Error(response.statusText);
           }
           return this.parseJson(response);
         })
-      ),
-      {
-        //needed due to some cors error and work around it
-        mode: "no-cors",
-      }
+      )
     )
       .then((data) => {
         console.log("Success", data[0].data);
