@@ -8,15 +8,15 @@ function StatsCardDeck(props) {
   deckOfCards = data1.map((provStats) => {
     return data2.map((provInfo) => {
       if (
-        provStats.province !== "Repatriated" &&
-        provStats.province === provInfo.province
+        provStats.region !== "Repatriated" &&
+        provStats.region === provInfo.code
       ) {
         return (
           <StatsCard
-            key={provStats.province}
-            provinceName={provStats.province}
-            fullyVacc={provStats.cumulative_cvaccine}
-            population={provInfo.pop}
+            key={provStats.region}
+            provinceName={provInfo.name}
+            fullyVacc={provStats.vaccine_administration_dose_2}
+            population={provInfo.population}
           />
         );
       }

@@ -2,49 +2,47 @@ import React from "react";
 import StatusBar from "./StatusBar";
 import "./TableStats.css";
 function TableStats(props) {
-  const { data1, data2, data3, date } = props;
+  const { data1, data2, data3, data4, date } = props;
   let tableData;
-  let canadaCovidStat = data3[0];
+  let canadaCovidStat = data3;
+  let countryName = "Canada";
 
   let canadaPopulation = calculateCountryPop(data2);
+  let canadaTotalRecoveries = calcualteCountryTotalRecovered(data4);
   //needed as it maybe called before api call has been completed
-  tableData = data1.map((provCovidStat) => {
-    return data2.map((provInfo) => {
-      if (
-        provCovidStat.province === provInfo.province &&
-        provCovidStat.province !== "Repatriated"
-      ) {
-        let provinceName;
-        if (provInfo.province === "BC") {
-          provinceName = "British Columbia";
-        } else if (provInfo.province === "NL") {
-          provinceName = "Newfoundland and Labrador";
-        } else {
-          provinceName = provInfo.province;
-        }
+  tableData = data2.map((provInfo) => {
+    return data1.map((provCovidStat) => {
+      if (provCovidStat.region === provInfo.code) {
+        let provinceName = provInfo.name;
+        let provinceTotalRecoveredCases = data4.find(
+          (element) => element.province === provInfo.code
+        );
+
+        provinceTotalRecoveredCases =
+          provinceTotalRecoveredCases.total_recoveries;
         return (
-          <tr key={provCovidStat.province} className="table-row">
+          <tr key={provCovidStat.region} className="table-row">
             <td className="table-cell province-table-cell">
               <p className="provinces-names">{provinceName}</p>
             </td>
             <td className="table-cell">
               <StatusBar
-                data={provCovidStat.active_cases}
-                data2={provInfo.pop}
+                data={provCovidStat.cases}
+                data2={provInfo.population}
                 barType="cases"
               />
             </td>
             <td className="table-cell">
               <StatusBar
-                data={provCovidStat.cumulative_recovered}
-                data2={provCovidStat.cumulative_cases}
+                data={provinceTotalRecoveredCases}
+                data2={provCovidStat.cases}
                 barType="recovered"
               />
             </td>
             <td className="table-cell">
               <StatusBar
-                data={provCovidStat.cumulative_deaths}
-                data2={provCovidStat.cumulative_cases}
+                data={provCovidStat.deaths}
+                data2={provCovidStat.cases}
                 barType="mortality"
               />
             </td>
@@ -77,26 +75,26 @@ function TableStats(props) {
             </tr>
             <tr className="table-row">
               <td className="table-cell province-table-cell">
-                <p className="provinces-names">{canadaCovidStat.province}</p>
+                <p className="provinces-names">{countryName}</p>
               </td>
               <td className="table-cell">
                 <StatusBar
-                  data={canadaCovidStat.active_cases}
+                  data={canadaCovidStat.cases}
                   data2={canadaPopulation}
                   barType="cases"
                 />
               </td>
               <td className="table-cell">
                 <StatusBar
-                  data={canadaCovidStat.cumulative_recovered}
-                  data2={canadaCovidStat.cumulative_cases}
+                  data={canadaTotalRecoveries}
+                  data2={canadaCovidStat.cases}
                   barType="recovered"
                 />
               </td>
               <td className="table-cell">
                 <StatusBar
-                  data={canadaCovidStat.cumulative_deaths}
-                  data2={canadaCovidStat.cumulative_cases}
+                  data={canadaCovidStat.deaths}
+                  data2={canadaCovidStat.cases}
                   barType="mortality"
                 />
               </td>
@@ -136,9 +134,19 @@ function TableStats(props) {
 function calculateCountryPop(this_data) {
   let totalPop = 0;
   for (const provinceInfo of this_data) {
-    if (provinceInfo.province !== "Repatriated") totalPop += provinceInfo.pop;
+    if (provinceInfo.population !== null) {
+      totalPop += provinceInfo.population;
+    }
   }
 
   return totalPop;
+}
+
+function calcualteCountryTotalRecovered(this_data) {
+  let totalRecovered = 0;
+  for (const province of this_data) {
+    totalRecovered += province.total_recoveries;
+  }
+  return totalRecovered;
 }
 export default TableStats;

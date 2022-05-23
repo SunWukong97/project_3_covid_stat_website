@@ -11,13 +11,12 @@ class App extends Component {
     super(props);
     this.apiCall = this.apiCall.bind(this);
     this.parseJson = this.parseJson.bind(this);
-    //this.dateSelection = this.dateSelection.bind(this);
 
     this.state = {
-      dataSet1: null,
-      dataSet2: null,
-      dataSet3: null,
-      dataSet4: null,
+      dataSet1CovidStats: null,
+      dataSet2Population: null,
+      dataSet3CountryCovidStats: null,
+      dataSet4RecoveryStats: null,
       isLoading: true,
       date: null,
     };
@@ -34,28 +33,47 @@ class App extends Component {
 
   //handles the api call and requires a date in yyyy-mm-dd or dd-mm-yyyy format as an argument
   apiCall(dateValue) {
-    const apiUrl1 = `https://api.opencovid.ca/summary?date=${dateValue}`;
-    const apiUrl2 = "https://api.opencovid.ca/other?stat=prov";
-    const apiUrl3 = `https://api.opencovid.ca/summary?loc=canada&date=${dateValue}`;
-    let apiUrls = [apiUrl1, apiUrl2, apiUrl3];
+    const apiCovidStatUrl = `https://api.opencovid.ca/summary?date=${dateValue}`;
+    const apiPopulationUrl = "https://api.covid19tracker.ca/provinces";
+
+    const apiCountryUrl = `https://api.opencovid.ca/summary?geo=can&date=${dateValue}&fill=true&version=true&pt_names=short&hr_names=hruid&fmt=json`;
+
+    const apiRecoveryUrl = `https://api.covid19tracker.ca/summary/split`;
+    let apiUrls = [
+      apiCovidStatUrl,
+      apiPopulationUrl,
+      apiCountryUrl,
+      apiRecoveryUrl,
+    ];
 
     Promise.all(
       apiUrls.map((urlIndex) =>
-        fetch(urlIndex).then((response) => this.parseJson(response))
+        fetch(urlIndex).then((response) => {
+          if (!response.ok) {
+            throw Error(response.statusText);
+          }
+          return this.parseJson(response);
+        })
       )
-    ).then((data) => {
-      // console.log("Success", data[0]);
-      // console.log("Success", data[1]);
-      // console.log("success", data[2]);
+    )
+      .then((data) => {
+        console.log("Success", data[0].data);
+        console.log("Success", data[1]);
+        console.log("success", data[2].data[0]);
+        console.log("Success", data[3].data);
 
-      this.setState({
-        dataSet1: data[0].summary,
-        dataSet2: data[1].prov,
-        dataSet3: data[2].summary,
-        isLoading: false,
-        date: dateValue,
+        this.setState({
+          dataSet1CovidStats: data[0].data,
+          dataSet2Population: data[1],
+          dataSet3CountryCovidStats: data[2].data[0],
+          dataSet4RecoveryStats: data[3].data,
+          isLoading: false,
+          date: dateValue,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
       });
-    });
   }
 
   parseJson(response) {
@@ -69,24 +87,27 @@ class App extends Component {
   render() {
     let heroSection;
     let statsCardDeck;
-    if (!this.state.isLoading && this.state.dataSet1.length !== 0) {
+
+    if (!this.state.isLoading) {
       heroSection = (
         <HeroSection
-          data1={this.state.dataSet1}
-          data2={this.state.dataSet2}
-          data3={this.state.dataSet3}
+          data1={this.state.dataSet1CovidStats}
+          data2={this.state.dataSet2Population}
+          data3={this.state.dataSet3CountryCovidStats}
+          data4={this.state.dataSet4RecoveryStats}
           date={this.state.date}
         />
       );
       statsCardDeck = (
         <StatsCardDeck
-          data1={this.state.dataSet1}
-          data2={this.state.dataSet2}
+          data1={this.state.dataSet1CovidStats}
+          data2={this.state.dataSet2Population}
         />
       );
     } else {
       heroSection = <p className="error">Data is currently Unavailable</p>;
     }
+
     return (
       <React.Fragment>
         <NavBar dateSelection={this.apiCall} />
