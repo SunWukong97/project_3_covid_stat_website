@@ -7,11 +7,19 @@ function MyDatePicker(props) {
   let yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
   let maxDate = yesterday.toISOString().slice(0, 10);
+  let minDate = "2020-09-01";
 
   const [date, setDate] = useState(maxDate);
   const onChangeHandler = (event) => {
-    dateSelection(event.target.value);
-    setDate(event.target.value);
+    let d1 = new Date(event.target.value);
+    let d2 = new Date(minDate);
+
+    if (d1 < d2) {
+      dateSelection(minDate);
+    } else {
+      dateSelection(event.target.value);
+      setDate(event.target.value);
+    }
   };
 
   return (
@@ -20,6 +28,7 @@ function MyDatePicker(props) {
         type="date"
         name="Date selection"
         max={maxDate}
+        min={minDate}
         value={date}
         onChange={onChangeHandler}
       ></input>
