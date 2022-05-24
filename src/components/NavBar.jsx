@@ -13,8 +13,7 @@ class NavBar extends Component {
             COVID STATS CAN
           </a>
 
-          {/* current version of apis used doesn't allow dates to be picked 
-          <MyDatePicker dateSelection={this.props.dateSelection} /> */}
+          <MyDatePicker dateSelection={this.props.dateSelection} />
         </div>
       </nav>
     );
