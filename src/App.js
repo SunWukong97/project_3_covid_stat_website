@@ -14,9 +14,7 @@ class App extends Component {
 
     this.state = {
       dataSet1CovidStats: null,
-      dataSet2Population: null,
-      dataSet3CountryCovidStats: null,
-      dataSet4RecoveryStats: null,
+      dataSet2CountryCovidStats: null,
       isLoading: true,
       date: null,
     };
@@ -34,23 +32,17 @@ class App extends Component {
   //handles the api call and requires a date in yyyy-mm-dd or dd-mm-yyyy format as an argument
   apiCall(dateValue) {
     const apiCovidStatUrl = `https://api.opencovid.ca/summary?date=${dateValue}`;
-    const apiPopulationUrl = "https://api.covid19tracker.ca/provinces";
+    //const apiPopulationUrl = null;
 
     const apiCountryUrl = `https://api.opencovid.ca/summary?geo=can&date=${dateValue}&fill=true&version=true&pt_names=short&hr_names=hruid&fmt=json`;
 
-    const apiRecoveryUrl = `https://api.covid19tracker.ca/summary/split`;
-    let apiUrls = [
-      apiCovidStatUrl,
-      apiPopulationUrl,
-      apiCountryUrl,
-      apiRecoveryUrl,
-    ];
+    //const apiRecoveryUrl = null;
+    let apiUrls = [apiCovidStatUrl, apiCountryUrl];
 
     Promise.all(
       apiUrls.map((urlIndex) =>
         fetch(urlIndex, {
-          //needed due to some cors error and work around it
-          mode: "no-cors",
+          method: "Get",
         }).then((response) => {
           if (!response.ok) {
             throw Error(response.statusText);
@@ -62,14 +54,10 @@ class App extends Component {
       .then((data) => {
         console.log("Success", data[0].data);
         console.log("Success", data[1]);
-        console.log("success", data[2].data[0]);
-        console.log("Success", data[3].data);
 
         this.setState({
           dataSet1CovidStats: data[0].data,
-          dataSet2Population: data[1],
-          dataSet3CountryCovidStats: data[2].data[0],
-          dataSet4RecoveryStats: data[3].data,
+          dataSet2CountryCovidStats: data[1].data[0],
           isLoading: false,
           date: dateValue,
         });
@@ -95,16 +83,14 @@ class App extends Component {
       heroSection = (
         <HeroSection
           data1={this.state.dataSet1CovidStats}
-          data2={this.state.dataSet2Population}
-          data3={this.state.dataSet3CountryCovidStats}
-          data4={this.state.dataSet4RecoveryStats}
+          data2={this.state.dataSet2CountryCovidStats}
           date={this.state.date}
         />
       );
       statsCardDeck = (
         <StatsCardDeck
           data1={this.state.dataSet1CovidStats}
-          data2={this.state.dataSet2Population}
+          cardText="Recieved dose 3"
         />
       );
     } else {

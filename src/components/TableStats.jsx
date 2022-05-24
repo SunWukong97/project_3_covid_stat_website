@@ -2,55 +2,42 @@ import React from "react";
 import StatusBar from "./StatusBar";
 import "./TableStats.css";
 function TableStats(props) {
-  const { data1, data2, data3, data4, date } = props;
+  const { data1Provincal, data2Country, date } = props;
   let tableData;
-  let canadaCovidStat = data3;
+  let canadaCovidStat = data2Country;
   let countryName = "Canada";
 
-  let canadaPopulation = calculateCountryPop(data2);
-  let canadaTotalRecoveries = calcualteCountryTotalRecovered(data4);
   //needed as it maybe called before api call has been completed
-  tableData = data2.map((provInfo) => {
-    return data1.map((provCovidStat) => {
-      if (provCovidStat.region === provInfo.code) {
-        let provinceName = provInfo.name;
-        let provinceTotalRecoveredCases = data4.find(
-          (element) => element.province === provInfo.code
-        );
-
-        provinceTotalRecoveredCases =
-          provinceTotalRecoveredCases.total_recoveries;
-        return (
-          <tr key={provCovidStat.region} className="table-row">
-            <td className="table-cell province-table-cell">
-              <p className="provinces-names">{provinceName}</p>
-            </td>
-            <td className="table-cell">
-              <StatusBar
-                data={provCovidStat.cases}
-                data2={provInfo.population}
-                barType="cases"
-              />
-            </td>
-            <td className="table-cell">
-              <StatusBar
-                data={provinceTotalRecoveredCases}
-                data2={provCovidStat.cases}
-                barType="recovered"
-              />
-            </td>
-            <td className="table-cell">
-              <StatusBar
-                data={provCovidStat.deaths}
-                data2={provCovidStat.cases}
-                barType="mortality"
-              />
-            </td>
-          </tr>
-        );
-      }
+  tableData = data1Provincal.map((provCovidStat) => {
+    if (provCovidStat !== null) {
+      let provinceName = provCovidStat.region;
+      return (
+        <tr key={provCovidStat.region} className="table-row">
+          <td className="table-cell province-table-cell">
+            <p className="provinces-names">{provinceName}</p>
+          </td>
+          <td className="table-cell">
+            <p>{provCovidStat.cases}</p>
+          </td>
+          <td className="table-cell">
+            <StatusBar
+              data={provCovidStat.cases}
+              data2={provCovidStat.tests_completed}
+              barType="recovered"
+            />
+          </td>
+          <td className="table-cell">
+            <StatusBar
+              data={provCovidStat.deaths}
+              data2={provCovidStat.cases}
+              barType="mortality"
+            />
+          </td>
+        </tr>
+      );
+    } else {
       return null;
-    });
+    }
   });
 
   return (
@@ -64,10 +51,10 @@ function TableStats(props) {
                 <h2>&nbsp;</h2>
               </td>
               <td className="table-cell">
-                <h2>Number Of Active Cases</h2>
+                <h2>Total Cases</h2>
               </td>
               <td className="table-cell">
-                <h2>Recovered</h2>
+                <h2>Infection Rate</h2>
               </td>
               <td className="table-cell">
                 <h2>Mortality Rate</h2>
@@ -78,16 +65,12 @@ function TableStats(props) {
                 <p className="provinces-names">{countryName}</p>
               </td>
               <td className="table-cell">
-                <StatusBar
-                  data={canadaCovidStat.cases}
-                  data2={canadaPopulation}
-                  barType="cases"
-                />
+                <p>{canadaCovidStat.cases}</p>
               </td>
               <td className="table-cell">
                 <StatusBar
-                  data={canadaTotalRecoveries}
-                  data2={canadaCovidStat.cases}
+                  data={canadaCovidStat.cases}
+                  data2={canadaCovidStat.tests_completed}
                   barType="recovered"
                 />
               </td>
@@ -108,10 +91,10 @@ function TableStats(props) {
                 <h2>Province/Territories</h2>
               </td>
               <td className="table-cell">
-                <h2>Number Of Active Cases</h2>
+                <h2>Total Cases</h2>
               </td>
               <td className="table-cell">
-                <h2>Recovered</h2>
+                <h2>Infection Rate</h2>
               </td>
               <td className="table-cell">
                 <h2>Mortality Rate</h2>
