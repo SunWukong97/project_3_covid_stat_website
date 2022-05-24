@@ -23,14 +23,14 @@ function TableStats(props) {
             <StatusBar
               data={provCovidStat.cases}
               data2={provCovidStat.tests_completed}
-              barType="recovered"
+              barColour="yellow"
             />
           </td>
           <td className="table-cell">
             <StatusBar
               data={provCovidStat.deaths}
               data2={provCovidStat.cases}
-              barType="mortality"
+              barColour="blue"
             />
           </td>
         </tr>
@@ -71,14 +71,14 @@ function TableStats(props) {
                 <StatusBar
                   data={canadaCovidStat.cases}
                   data2={canadaCovidStat.tests_completed}
-                  barType="recovered"
+                  barColour="yellow"
                 />
               </td>
               <td className="table-cell">
                 <StatusBar
                   data={canadaCovidStat.deaths}
                   data2={canadaCovidStat.cases}
-                  barType="mortality"
+                  barColour="blue"
                 />
               </td>
             </tr>

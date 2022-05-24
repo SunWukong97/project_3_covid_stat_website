@@ -16,13 +16,13 @@
   height: 100%;
   border-radius: 0.5em;
 }
-.cases {
+.red {
   background-color: #c52828;
 }
-.recovered {
+.yellow {
   background-color: #ffc857;
 }
-.mortality {
+.blue {
   background-color: #255f85;
 }
 

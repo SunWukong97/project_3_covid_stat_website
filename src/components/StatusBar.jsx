@@ -1,14 +1,14 @@
 import React from "react";
 import "./StatusBar.css";
 function StatusBar(props) {
-  const { data, data2, barType } = props;
-  const styling = `status-bar ${barType}`;
+  const { data, data2, barType, barColour } = props;
+  const styling = `status-bar ${barColour}`;
   let stat;
   let percentage = ((data / data2) * 100).toFixed(2);
 
   stat = percentage + "%";
 
-  if (barType === "cases") {
+  if (barType === "data") {
     stat = data;
   }
   if (percentage < 5) {
